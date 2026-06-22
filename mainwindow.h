@@ -2,10 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QSerialPort>
+#include "serialarduino.h"
+#include "usuarioswindow.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui {
+class MainWindow;
+}
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
@@ -17,16 +20,20 @@ public:
     ~MainWindow();
 
 private slots:
-    void ligarLED();
-    void desligarLED();
-    void lerSerial();
+    void conectarArduino();
+    void desconectarArduino();
+    void ligarLed();
+    void desligarLed();
+    void receberDados(QString dados);
 
-    void on_ligarVermelho_clicked();
-
+    void abrirUsuarios();
+    void usuarioLogado();
 
 private:
     Ui::MainWindow *ui;
-    QSerialPort *arduino;
 
+    SerialArduino arduino;
+    UsuariosWindow *menuUsuarios;
 };
+
 #endif // MAINWINDOW_H
